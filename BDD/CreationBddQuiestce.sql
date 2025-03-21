@@ -1,70 +1,79 @@
--- Création de la BDD
-CREATE DATABASE quiestce;
+-- Create the database
+CREATE DATABASE whoami;
 
--- Utilisation de la BDD
-USE quiestce;
+-- Use the database
+USE whoami;
 
--- Création de la table Compte
-CREATE TABLE Compte (
-    compte_id INT AUTO_INCREMENT PRIMARY KEY,
-    pseudo VARCHAR(30) NOT NULL,
-    compte_mdp VARCHAR(20) NOT NULL,
+-- Create the Account table
+CREATE TABLE Account (
+    account_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(30) NOT NULL,
+    password VARCHAR(20) NOT NULL,
     age INT,
-    genre VARCHAR(10),
-    nb_parties_jouees INT DEFAULT 0,
-    nb_victoires INT DEFAULT 0
+    gender VARCHAR(10),
+    games_played INT DEFAULT 0,
+    victories INT DEFAULT 0
 );
 
--- Création de la table Grille
-CREATE TABLE Grille (
-    grille_id INT AUTO_INCREMENT PRIMARY KEY,
-    grille_nom VARCHAR(30) NOT NULL,
-    grille_taille INT NOT NULL,
+-- Create the Grid table
+CREATE TABLE Grid (
+    grid_id INT AUTO_INCREMENT PRIMARY KEY,
+    grid_name VARCHAR(30) NOT NULL,
+    grid_size INT NOT NULL,
     random BOOLEAN NOT NULL
 );
 
--- Création de la table Partie
-CREATE TABLE Partie (
-    partie_id INT AUTO_INCREMENT PRIMARY KEY,
-    partie_mdp VARCHAR(20) NOT NULL,
-    createur_id INT,
-    adversaire_id INT,
-    nb_manches INT,
-    limite_nombre_tours INT,
-    grille_id INT,
-    spectateur BOOLEAN,
-    partie_date DATETIME,
-    CONSTRAINT fk_Partie_createur FOREIGN KEY (createur_id) REFERENCES Compte(compte_id),
-    CONSTRAINT fk_Partie_adversaire FOREIGN KEY (adversaire_id) REFERENCES Compte(compte_id),
-    CONSTRAINT fk_Partie_grille FOREIGN KEY (grille_id) REFERENCES Grille(grille_id)
+-- Create the Game table
+CREATE TABLE Game (
+    game_id INT AUTO_INCREMENT PRIMARY KEY,
+    game_password VARCHAR(20) NOT NULL,
+    creator_id INT,
+    opponent_id INT,
+    rounds_count INT,
+    turn_limit INT,
+    grid_id INT,
+    spectator BOOLEAN,
+    game_date DATETIME,
+    CONSTRAINT fk_Game_creator FOREIGN KEY (creator_id) REFERENCES Account(account_id),
+    CONSTRAINT fk_Game_opponent FOREIGN KEY (opponent_id) REFERENCES Account(account_id),
+    CONSTRAINT fk_Game_grid FOREIGN KEY (grid_id) REFERENCES Grid(grid_id)
 );
 
--- Création de la table HistoriquePartie
-CREATE TABLE HistoriquePartie (
-    partie_id INT,
-    joueur1_id INT,
-    joueur2_id INT,
-    joueur1_score INT,
-    joueur2_score INT,
-    gagnant INT,
-    CONSTRAINT fk_HistoriquePartie_partie FOREIGN KEY (partie_id) REFERENCES Partie(partie_id),
-    CONSTRAINT fk_HistoriquePartie_joueur1 FOREIGN KEY (joueur1_id) REFERENCES Compte(compte_id),
-    CONSTRAINT fk_HistoriquePartie_joueur2 FOREIGN KEY (joueur2_id) REFERENCES Compte(compte_id)
+-- Create the GameHistory table
+CREATE TABLE GameHistory (
+    game_id INT,
+    player1_id INT,
+    player2_id INT,
+    player1_score INT,
+    player2_score INT,
+    winner INT,
+    CONSTRAINT fk_GameHistory_game FOREIGN KEY (game_id) REFERENCES Game(game_id),
+    CONSTRAINT fk_GameHistory_player1 FOREIGN KEY (player1_id) REFERENCES Account(account_id),
+    CONSTRAINT fk_GameHistory_player2 FOREIGN KEY (player2_id) REFERENCES Account(account_id)
 );
 
--- Création de la table Manches
-CREATE TABLE Manches (
-    manche_id INT AUTO_INCREMENT PRIMARY KEY,
-    partie_id INT,
-    num_manche INT,
-    gagnant_id INT,
-    CONSTRAINT fk_Manches_partie FOREIGN KEY (partie_id) REFERENCES Partie(partie_id),
-    CONSTRAINT fk_Manches_gagnant FOREIGN KEY (gagnant_id) REFERENCES Compte(compte_id)
+-- Create the Round table
+CREATE TABLE Round (
+    round_id INT AUTO_INCREMENT PRIMARY KEY,
+    game_id INT,
+    round_number INT,
+    winner_id INT,
+    CONSTRAINT fk_Round_game FOREIGN KEY (game_id) REFERENCES Game(game_id),
+    CONSTRAINT fk_Round_winner FOREIGN KEY (winner_id) REFERENCES Account(account_id)
 );
 
--- Création de la table Personnage
-CREATE TABLE Personnage (
-    personnage_id INT AUTO_INCREMENT PRIMARY KEY,
-    personnage_nom VARCHAR(10) NOT NULL,
-    url_image VARCHAR(50) NOT NULL
+-- Create the Character table
+CREATE TABLE Character (
+    character_id INT AUTO_INCREMENT PRIMARY KEY,
+    character_name VARCHAR(10) NOT NULL,
+    image_url VARCHAR(50) NOT NULL
+);
+
+-- Create the junction table GridCharacter
+CREATE TABLE GridCharacter (
+    grid_id INT,
+    character_id INT,
+    PRIMARY KEY (grid_id, character_id),
+    CONSTRAINT fk_GridCharacter_grid FOREIGN KEY (grid_id) REFERENCES Grid(grid_id),
+    CONSTRAINT fk_GridCharacter_character FOREIGN KEY (character_id) REFERENCES Character(character_id)
 );
