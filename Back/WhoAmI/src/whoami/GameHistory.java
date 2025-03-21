@@ -1,9 +1,9 @@
 package whoami;
 
 public class GameHistory implements java.io.Serializable{
-    private int game_id;
-    private int player1_id;
-    private int player2_id;
+    private Game game_id;
+    private Account player1_id;
+    private Account player2_id;
     private int player1_score;
     private int player2_score;
     private int winner_id;
@@ -11,7 +11,7 @@ public class GameHistory implements java.io.Serializable{
     public GameHistory() {
     }
 
-    public GameHistory(int game_id, int player1_id, int player2_id, int player1_score, int player2_score, int winner_id) {
+    public GameHistory(Game game_id, Account player1_id, Account player2_id, int player1_score, int player2_score, int winner_id) {
         this.game_id = game_id;
         this.player1_id = player1_id;
         this.player2_id = player2_id;
@@ -24,7 +24,7 @@ public class GameHistory implements java.io.Serializable{
         return this.game_id;
     }
 
-    public void setGameId(int game_id) {
+    public void setGameId(Game game_id) {
         this.game_id = game_id;
     }
 
@@ -32,7 +32,7 @@ public class GameHistory implements java.io.Serializable{
         return this.player1_id;
     }
 
-    public void setPlayer1Id(int player1_id) {
+    public void setPlayer1Id(Account player1_id) {
         this.player1_id = player1_id;
     }
 
@@ -40,7 +40,7 @@ public class GameHistory implements java.io.Serializable{
         return this.player2_id;
     }
 
-    public void setPlayer2Id(int player2_id) {
+    public void setPlayer2Id(Account player2_id) {
         this.player2_id = player2_id;
     }
 

@@ -2,14 +2,14 @@ package whoami;
 
 public class Round implements java.io.Serializable{
     private int round_id;
-    private int game_id;
+    private Game game_id;
     private int round_number;
-    private int winner_id;
+    private Account winner_id;
 
     public Round() {
     }
 
-    public Round(int round_id, int game_id, int round_number, int winner_id) {
+    public Round(int round_id, Game game_id, int round_number, Account winner_id) {
         this.round_id = round_id;
         this.game_id = game_id;
         this.round_number = round_number;
@@ -28,7 +28,7 @@ public class Round implements java.io.Serializable{
         return this.game_id;
     }
 
-    public void setGameId(int game_id) {
+    public void setGameId(Game game_id) {
         this.game_id = game_id;
     }
 
@@ -44,7 +44,7 @@ public class Round implements java.io.Serializable{
         return this.winner_id;
     }
 
-    public void setWinnerId(int winner_id) {
+    public void setWinnerId(Account winner_id) {
         this.winner_id = winner_id;
     }
 }

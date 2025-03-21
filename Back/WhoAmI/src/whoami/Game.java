@@ -3,18 +3,18 @@ package whoami;
 public class Game implements java.io.Serializable{
     private int game_id;
     private String game_password;
-    private int host_id;
-    private int guest_id;
+    private Account host_id;
+    private Account guest_id;
     private int number_of_rounds;
     private int turn_limit;
-    private int grid_id;
+    private Grid grid_id;
     private boolean spectator;
     private String date;
 
     public Game() {
     }
 
-    public Game(int game_id, String game_password, int host_id, int guest_id, int number_of_rounds, int turn_limit, int grid_id, boolean spectator, String date) {
+    public Game(int game_id, String game_password, Account host_id, Account guest_id, int number_of_rounds, int turn_limit, Grid grid_id, boolean spectator, String date) {
         this.game_id = game_id;
         this.game_password = game_password;
         this.host_id = host_id;
@@ -46,7 +46,7 @@ public class Game implements java.io.Serializable{
         return this.host_id;
     }
 
-    public void setHostId(int host_id) {
+    public void setHostId(Account host_id) {
         this.host_id = host_id;
     }
 
@@ -54,7 +54,7 @@ public class Game implements java.io.Serializable{
         return this.guest_id;
     }
 
-    public void setGuestId(int guest_id) {
+    public void setGuestId(Account guest_id) {
         this.guest_id = guest_id;
     }
 
@@ -78,7 +78,7 @@ public class Game implements java.io.Serializable{
         return this.grid_id;
     }
 
-    public void setGridId(int grid_id) {
+    public void setGridId(Grid grid_id) {
         this.grid_id = grid_id;
     }
 
