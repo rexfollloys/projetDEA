@@ -6,7 +6,7 @@ USE whoami;
 
 -- Create the Account table
 CREATE TABLE Account (
-    account_id INT AUTO_INCREMENT PRIMARY KEY,
+    account_id INT PRIMARY KEY,
     username VARCHAR(30) NOT NULL,
     password VARCHAR(20) NOT NULL,
     age INT,
@@ -16,7 +16,7 @@ CREATE TABLE Account (
 );
 -- Create the Grid table
 CREATE TABLE Grid (
-    grid_id INT AUTO_INCREMENT PRIMARY KEY,
+    grid_id INT PRIMARY KEY,
     grid_name VARCHAR(30) NOT NULL,
     grid_size INT NOT NULL,
     random BOOLEAN NOT NULL
@@ -24,7 +24,7 @@ CREATE TABLE Grid (
 
 -- Create the Game table
 CREATE TABLE Game (
-    game_id INT AUTO_INCREMENT PRIMARY KEY,
+    game_id INT PRIMARY KEY,
     game_password VARCHAR(20) NOT NULL,
     creator_id INT,
     opponent_id INT,
@@ -53,7 +53,7 @@ CREATE TABLE GameHistory (
 
 -- Create the Round table
 CREATE TABLE Round (
-    round_id INT AUTO_INCREMENT PRIMARY KEY,
+    round_id INT PRIMARY KEY,
     game_id INT,
     round_number INT,
     winner_id INT,
@@ -63,7 +63,7 @@ CREATE TABLE Round (
 
 -- Create the Character table
 CREATE TABLE Character (
-    character_id INT AUTO_INCREMENT PRIMARY KEY,
+    character_id INT PRIMARY KEY,
     character_name VARCHAR(10) NOT NULL,
     image_url VARCHAR(50) NOT NULL
 );
