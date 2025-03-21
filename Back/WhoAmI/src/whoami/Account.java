@@ -1,32 +1,32 @@
 package whoami;
 
-public class Compte implements java.io.Serializable{
-    private int compte_id;
+public class Account implements java.io.Serializable{
+    private int Account_id;
     private String pseudo;
-    private String compte_mdp;
+    private String Account_password;
     private int age;
     private String genre;
-    private int nb_parties_jouees;
-    private int nb_victoires;
+    private int game_played;
+    private int win_number;
     
-    public Compte(){}
+    public Account(){}
 
-    public Compte(int compte_id, String pseudo, String compte_mdp, int age, String genre, int nb_parties_jouees, int nb_victoires){
-        this.compte_id = compte_id;
+    public Account(int Account_id, String pseudo, String Account_password, int age, String genre, int game_played, int win_number){
+        this.Account_id = Account_id;
         this.pseudo = pseudo;
-        this.compte_mdp = compte_mdp;
+        this.Account_password = Account_password;
         this.age = age;
         this.genre = genre;
-        this.nb_parties_jouees = nb_parties_jouees;
-        this.nb_victoires = nb_victoires;
+        this.game_played = game_played;
+        this.win_number = win_number;
     }
 
-    public String getCompteId(){
-        return this.compte_id;
+    public String getAccountId(){
+        return this.Account_id;
     }
 
-    public void setCompteId(String compte_id){
-        this.compte_id = compte_id;
+    public void setAccountId(String Account_id){
+        this.Account_id = Account_id;
     }
 
     public String getPseudo(){
@@ -37,12 +37,12 @@ public class Compte implements java.io.Serializable{
         this.pseudo = pseudo;
     }
 
-    public String getCompteMdp(){
-        return this.compte_mdp;
+    public String getAccountpassword(){
+        return this.Account_password;
     }
 
-    public void setCompteMdp(String compte_mdp){
-        this.compte_mdp = compte_mdp;
+    public void setAccountpassword(String Account_password){
+        this.Account_password = Account_password;
     }
 
     public int getAge(){
@@ -62,19 +62,19 @@ public class Compte implements java.io.Serializable{
     }
 
     public int getNbPartiesJouees(){
-        return this.nb_parties_jouees;
+        return this.game_played;
     }
 
-    public void setNbPartiesJouees(int nb_parties_jouees){
-        this.nb_parties_jouees = nb_parties_jouees;
+    public void setNbPartiesJouees(int game_played){
+        this.game_played = game_played;
     }
 
     public int getNbVictoires(){
-        return this.nb_victoires;
+        return this.win_number;
     }
 
-    public void setNbVictoires(int nb_victoires){
-        this.nb_victoires = nb_victoires;
+    public void setNbVictoires(int win_number){
+        this.win_number = win_number;
     }
 
     /*
