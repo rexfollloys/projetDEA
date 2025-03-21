@@ -9,12 +9,12 @@ public class Game implements java.io.Serializable{
     private int turn_limit;
     private Grid grid_id;
     private boolean spectator;
-    private String date;
+    private String game_date;
 
     public Game() {
     }
 
-    public Game(int game_id, String game_password, Account host_id, Account guest_id, int number_of_rounds, int turn_limit, Grid grid_id, boolean spectator, String date) {
+    public Game(int game_id, String game_password, Account host_id, Account guest_id, int number_of_rounds, int turn_limit, Grid grid_id, boolean spectator, String game_date) {
         this.game_id = game_id;
         this.game_password = game_password;
         this.host_id = host_id;
@@ -23,7 +23,7 @@ public class Game implements java.io.Serializable{
         this.turn_limit = turn_limit;
         this.grid_id = grid_id;
         this.spectator = spectator;
-        this.date = date;
+        this.game_date = game_date;
     }
 
     public int getGameId() {
@@ -90,11 +90,11 @@ public class Game implements java.io.Serializable{
         this.spectator = spectator;
     }
 
-    public String getDate() {
-        return this.date;
+    public String getGameDate() {
+        return this.game_date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setGameDate(String game_date) {
+        this.game_date = game_date;
     }
 }

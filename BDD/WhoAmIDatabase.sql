@@ -8,10 +8,10 @@ USE whoami;
 CREATE TABLE Account (
     account_id INT PRIMARY KEY,
     username VARCHAR(30) NOT NULL,
-    password VARCHAR(20) NOT NULL,
+    account_id VARCHAR(20) NOT NULL,
     age INT,
     gender ENUM('man', 'woman') DEFAULT 'man',
-    games_played INT DEFAULT 0,
+    game_played INT DEFAULT 0,
     victories INT DEFAULT 0
 );
 -- Create the Grid table
@@ -26,9 +26,9 @@ CREATE TABLE Grid (
 CREATE TABLE Game (
     game_id INT PRIMARY KEY,
     game_password VARCHAR(20) NOT NULL,
-    creator_id INT,
-    opponent_id INT,
-    rounds_count INT,
+    host_id INT,
+    guest_id INT,
+    number_of_rounds INT,
     turn_limit INT,
     grid_id INT,
     spectator BOOLEAN,
@@ -45,7 +45,7 @@ CREATE TABLE GameHistory (
     player2_id INT,
     player1_score INT,
     player2_score INT,
-    winner INT,
+    winner_id INT,
     CONSTRAINT fk_GameHistory_game FOREIGN KEY (game_id) REFERENCES Game(game_id),
     CONSTRAINT fk_GameHistory_player1 FOREIGN KEY (player1_id) REFERENCES Account(account_id),
     CONSTRAINT fk_GameHistory_player2 FOREIGN KEY (player2_id) REFERENCES Account(account_id)
@@ -65,7 +65,7 @@ CREATE TABLE Round (
 CREATE TABLE Character (
     character_id INT PRIMARY KEY,
     character_name VARCHAR(10) NOT NULL,
-    image_url VARCHAR(50) NOT NULL
+    url_image VARCHAR(50) NOT NULL
 );
 
 -- Create the junction table GridCharacter

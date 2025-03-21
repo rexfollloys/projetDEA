@@ -1,48 +1,48 @@
 package whoami;
 
 public class Account implements java.io.Serializable{
-    private int Account_id;
-    private String pseudo;
-    private String Account_password;
+    private int account_id;
+    private String username;
+    private String account_password;
     private int age;
-    private String genre;
+    private String gender;
     private int game_played;
-    private int win_number;
+    private int victories;
     
     public Account(){}
 
-    public Account(int Account_id, String pseudo, String Account_password, int age, String genre, int game_played, int win_number){
-        this.Account_id = Account_id;
-        this.pseudo = pseudo;
-        this.Account_password = Account_password;
+    public Account(int account_id, String username, String account_password, int age, String gender, int game_played, int victories){
+        this.account_id = account_id;
+        this.username = username;
+        this.account_password = account_password;
         this.age = age;
-        this.genre = genre;
+        this.gender = gender;
         this.game_played = game_played;
-        this.win_number = win_number;
+        this.victories = victories;
     }
 
     public String getAccountId(){
-        return this.Account_id;
+        return this.account_id;
     }
 
-    public void setAccountId(String Account_id){
-        this.Account_id = Account_id;
+    public void setAccountId(String account_id){
+        this.account_id = account_id;
     }
 
-    public String getPseudo(){
-        return this.pseudo;
+    public String getUsername(){
+        return this.username;
     }
     
-    public void setPseudo(String pseudo){
-        this.pseudo = pseudo;
+    public void setUsername(String username){
+        this.username = pseudo;
     }
 
     public String getAccountpassword(){
-        return this.Account_password;
+        return this.account_password;
     }
 
-    public void setAccountpassword(String Account_password){
-        this.Account_password = Account_password;
+    public void setAccountpassword(String account_password){
+        this.account_password = account_password;
     }
 
     public int getAge(){
@@ -53,12 +53,12 @@ public class Account implements java.io.Serializable{
         this.age = age;
     }
 
-    public String getGenre(){
-        return this.genre;
+    public String getGender(){
+        return this.gender;
     }
 
-    public void setGenre(String genre){
-        this.genre = genre;
+    public void setGender(String gender){
+        this.gender = gender;
     }
 
     public int getNbPartiesJouees(){
@@ -70,11 +70,11 @@ public class Account implements java.io.Serializable{
     }
 
     public int getNbVictoires(){
-        return this.win_number;
+        return this.victories;
     }
 
-    public void setNbVictoires(int win_number){
-        this.win_number = win_number;
+    public void setNbVictoires(int victories){
+        this.victories = victories;
     }
 
     /*
