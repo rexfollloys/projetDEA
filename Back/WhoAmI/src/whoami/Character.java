@@ -15,7 +15,7 @@ public class Character implements java.io.Serializable{
     }
 
     public int getCharacterId() {
-        return character_id;
+        return this.character_id;
     }
     
     public void setCharacterId(int character_id) {
@@ -23,7 +23,7 @@ public class Character implements java.io.Serializable{
     }
 
     public String getCharacterName() {
-        return character_name;
+        return this.character_name;
     }
 
     public void setCharacterName(String character_name) {
@@ -31,7 +31,7 @@ public class Character implements java.io.Serializable{
     }
 
     public String getUrlImage() {
-        return url_image;
+        return this.url_image;
     }
 
     public void setUrlImage(String url_image) {

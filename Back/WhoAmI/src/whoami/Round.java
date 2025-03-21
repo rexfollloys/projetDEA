@@ -17,7 +17,7 @@ public class Round implements java.io.Serializable{
     }
 
     public int getRoundId() {
-        return round_id;
+        return this.round_id;
     }
 
     public void setRoundId(int round_id) {
@@ -25,7 +25,7 @@ public class Round implements java.io.Serializable{
     }
 
     public int getGameId() {
-        return game_id;
+        return this.game_id;
     }
 
     public void setGameId(int game_id) {
@@ -33,7 +33,7 @@ public class Round implements java.io.Serializable{
     }
 
     public int getRoundNumber() {
-        return round_number;
+        return this.round_number;
     }
 
     public void setRoundNumber(int round_number) {
@@ -41,7 +41,7 @@ public class Round implements java.io.Serializable{
     }
 
     public int getWinnerId() {
-        return winner_id;
+        return this.winner_id;
     }
 
     public void setWinnerId(int winner_id) {

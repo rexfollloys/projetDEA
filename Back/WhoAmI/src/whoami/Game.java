@@ -27,7 +27,7 @@ public class Game implements java.io.Serializable{
     }
 
     public int getGameId() {
-        return game_id;
+        return this.game_id;
     }
 
     public void setGameId(int game_id) {
@@ -35,7 +35,7 @@ public class Game implements java.io.Serializable{
     }
 
     public String getGamePassword() {
-        return game_password;
+        return this.game_password;
     }
 
     public void setGamePassword(String game_password) {
@@ -43,7 +43,7 @@ public class Game implements java.io.Serializable{
     }
 
     public int getHostId() {
-        return host_id;
+        return this.host_id;
     }
 
     public void setHostId(int host_id) {
@@ -51,7 +51,7 @@ public class Game implements java.io.Serializable{
     }
 
     public int getGuestId() {
-        return guest_id;
+        return this.guest_id;
     }
 
     public void setGuestId(int guest_id) {
@@ -59,7 +59,7 @@ public class Game implements java.io.Serializable{
     }
 
     public int getNumberOfRounds() {
-        return number_of_rounds;
+        return this.number_of_rounds;
     }
 
     public void setNumberOfRounds(int number_of_rounds) {
@@ -67,7 +67,7 @@ public class Game implements java.io.Serializable{
     }
 
     public int getTurnLimit() {
-        return turn_limit;
+        return this.turn_limit;
     }
 
     public void setTurnLimit(int turn_limit) {
@@ -75,7 +75,7 @@ public class Game implements java.io.Serializable{
     }
 
     public int getGridId() {
-        return grid_id;
+        return this.grid_id;
     }
 
     public void setGridId(int grid_id) {
@@ -83,7 +83,7 @@ public class Game implements java.io.Serializable{
     }
 
     public boolean getSpectator() {
-        return spectator;
+        return this.spectator;
     }
 
     public void setSpectator(boolean spectator) {
@@ -91,7 +91,7 @@ public class Game implements java.io.Serializable{
     }
 
     public String getDate() {
-        return date;
+        return this.date;
     }
 
     public void setDate(String date) {

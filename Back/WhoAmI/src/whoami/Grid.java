@@ -17,7 +17,7 @@ public class Grid implements java.io.Serializable{
     }
 
     public int getGridId() {
-        return grid_id;
+        return this.grid_id;
     }
 
     public void setGridId(int grid_id) {
@@ -25,7 +25,7 @@ public class Grid implements java.io.Serializable{
     }
 
     public String getGridName() {
-        return grid_name;
+        return this.grid_name;
     }
 
     public void setGridName(String grid_name) {
@@ -33,7 +33,7 @@ public class Grid implements java.io.Serializable{
     }
 
     public int getGridSize() {
-        return grid_size;
+        return this.grid_size;
     }
 
     public void setGridSize(int grid_size) {
@@ -41,7 +41,7 @@ public class Grid implements java.io.Serializable{
     }
 
     public boolean getRandom() {
-        return random;
+        return this.random;
     }
 
     public void setRandom(boolean random) {

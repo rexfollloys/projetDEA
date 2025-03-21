@@ -21,7 +21,7 @@ public class GameHistory implements java.io.Serializable{
     }
 
     public int getGameId() {
-        return game_id;
+        return this.game_id;
     }
 
     public void setGameId(int game_id) {
@@ -29,7 +29,7 @@ public class GameHistory implements java.io.Serializable{
     }
 
     public int getPlayer1Id() {
-        return player1_id;
+        return this.player1_id;
     }
 
     public void setPlayer1Id(int player1_id) {
@@ -37,7 +37,7 @@ public class GameHistory implements java.io.Serializable{
     }
 
     public int getPlayer2Id() {
-        return player2_id;
+        return this.player2_id;
     }
 
     public void setPlayer2Id(int player2_id) {
@@ -45,7 +45,7 @@ public class GameHistory implements java.io.Serializable{
     }
 
     public int getPlayer1Score() {
-        return player1_score;
+        return this.player1_score;
     }
 
     public void setPlayer1Score(int player1_score) {
@@ -53,7 +53,7 @@ public class GameHistory implements java.io.Serializable{
     }
 
     public int getPlayer2Score() {
-        return player2_score;
+        return this.player2_score;
     }
 
     public void setPlayer2Score(int player2_score) {
@@ -61,7 +61,7 @@ public class GameHistory implements java.io.Serializable{
     }
 
     public int getWinnerId() {
-        return winner_id;
+        return this.winner_id;
     }
 
     public void setWinnerId(int winner_id) {
