@@ -22,7 +22,7 @@ CREATE TABLE Grid (
     grid_id NUMBER,
     grid_name VARCHAR(30) NOT NULL,
     grid_size NUMBER NOT NULL,
-    random BOOLEAN NOT NULL,
+    random NUMBER(1) NOT NULL CHECK (random IN (0, 1)),
     CONSTRAINT pk_Grid PRIMARY KEY (grid_id)
 );
 
@@ -35,11 +35,11 @@ CREATE TABLE Game (
     number_of_rounds NUMBER,
     turn_limit NUMBER,
     grid_id NUMBER,
-    spectator BOOLEAN,
-    game_date DATETIME,
+    spectator NUMBER(1) NOT NULL CHECK (spectator IN (0, 1)),
+    game_date DATE,
     CONSTRAINT pk_Game PRIMARY KEY (game_id),
-    CONSTRAINT fk_Game_creator FOREIGN KEY (creator_id) REFERENCES Account(account_id),
-    CONSTRAINT fk_Game_opponent FOREIGN KEY (opponent_id) REFERENCES Account(account_id),
+    CONSTRAINT fk_Game_AccountHost FOREIGN KEY (host_id) REFERENCES Account(account_id),
+    CONSTRAINT fk_Game_AccountGuest FOREIGN KEY (guest_id) REFERENCES Account(account_id),
     CONSTRAINT fk_Game_grid FOREIGN KEY (grid_id) REFERENCES Grid(grid_id)
 );
 
