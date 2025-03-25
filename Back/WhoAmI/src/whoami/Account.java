@@ -1,109 +1,189 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package whoami;
 
-public class Account implements java.io.Serializable{
-    private int account_id;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+/**
+ *
+ * @author lmercader
+ */
+@Entity
+@Table(name = "ACCOUNT")
+@NamedQueries({
+    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
+    @NamedQuery(name = "Account.findByAccountId", query = "SELECT a FROM Account a WHERE a.accountId = :accountId"),
+    @NamedQuery(name = "Account.findByUsername", query = "SELECT a FROM Account a WHERE a.username = :username"),
+    @NamedQuery(name = "Account.findByAge", query = "SELECT a FROM Account a WHERE a.age = :age"),
+    @NamedQuery(name = "Account.findByGender", query = "SELECT a FROM Account a WHERE a.gender = :gender"),
+    @NamedQuery(name = "Account.findByGamePlayed", query = "SELECT a FROM Account a WHERE a.gamePlayed = :gamePlayed"),
+    @NamedQuery(name = "Account.findByVictories", query = "SELECT a FROM Account a WHERE a.victories = :victories")})
+public class Account implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Id
+    @Basic(optional = false)
+    @Column(name = "ACCOUNT_ID")
+    private BigDecimal accountId;
+    @Basic(optional = false)
+    @Column(name = "USERNAME")
     private String username;
-    private String account_password;
-    private int age;
+    @Column(name = "AGE")
+    private BigInteger age;
+    @Column(name = "GENDER")
     private String gender;
-    private int game_played;
-    private int victories;
-    
-    public Account(){}
+    @Column(name = "GAME_PLAYED")
+    private BigInteger gamePlayed;
+    @Column(name = "VICTORIES")
+    private BigInteger victories;
+    @OneToMany(mappedBy = "guestId")
+    private Collection<Game> gameCollection;
+    @OneToMany(mappedBy = "hostId")
+    private Collection<Game> gameCollection1;
+    @OneToMany(mappedBy = "winnerId")
+    private Collection<Round> roundCollection;
+    @OneToMany(mappedBy = "player1Id")
+    private Collection<Gamehistory> gamehistoryCollection;
+    @OneToMany(mappedBy = "player2Id")
+    private Collection<Gamehistory> gamehistoryCollection1;
 
-    public Account(int account_id, String username, String account_password, int age, String gender, int game_played, int victories){
-        this.account_id = account_id;
+    public Account() {
+    }
+
+    public Account(BigDecimal accountId) {
+        this.accountId = accountId;
+    }
+
+    public Account(BigDecimal accountId, String username) {
+        this.accountId = accountId;
         this.username = username;
-        this.account_password = account_password;
-        this.age = age;
-        this.gender = gender;
-        this.game_played = game_played;
-        this.victories = victories;
     }
 
-    public String getAccountId(){
-        return this.account_id;
+    public BigDecimal getAccountId() {
+        return accountId;
     }
 
-    public void setAccountId(String account_id){
-        this.account_id = account_id;
+    public void setAccountId(BigDecimal accountId) {
+        this.accountId = accountId;
     }
 
-    public String getUsername(){
-        return this.username;
-    }
-    
-    public void setUsername(String username){
-        this.username = pseudo;
+    public String getUsername() {
+        return username;
     }
 
-    public String getAccountpassword(){
-        return this.account_password;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setAccountpassword(String account_password){
-        this.account_password = account_password;
+    public BigInteger getAge() {
+        return age;
     }
 
-    public int getAge(){
-        return this.age;
-    }
-
-    public void setAge(int age){
+    public void setAge(BigInteger age) {
         this.age = age;
     }
 
-    public String getGender(){
-        return this.gender;
+    public String getGender() {
+        return gender;
     }
 
-    public void setGender(String gender){
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public int getNbPartiesJouees(){
-        return this.game_played;
+    public BigInteger getGamePlayed() {
+        return gamePlayed;
     }
 
-    public void setNbPartiesJouees(int game_played){
-        this.game_played = game_played;
+    public void setGamePlayed(BigInteger gamePlayed) {
+        this.gamePlayed = gamePlayed;
     }
 
-    public int getNbVictoires(){
-        return this.victories;
+    public BigInteger getVictories() {
+        return victories;
     }
 
-    public void setNbVictoires(int victories){
+    public void setVictories(BigInteger victories) {
         this.victories = victories;
     }
 
-    /*
-        @Override
-    public String toString() {
-        return "["+idPersonne+"] nom: "+nom+ " "+adresse.toString();
+    public Collection<Game> getGameCollection() {
+        return gameCollection;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof Personne)) {
-            return false;
-        }
+    public void setGameCollection(Collection<Game> gameCollection) {
+        this.gameCollection = gameCollection;
+    }
 
-        Personne p = (Personne) obj;
+    public Collection<Game> getGameCollection1() {
+        return gameCollection1;
+    }
 
-        return ((idPersonne == p.getIdPersonne()) && (nom.equals(p.nom)) && (adresse.equals(p.getAdresse())));
+    public void setGameCollection1(Collection<Game> gameCollection1) {
+        this.gameCollection1 = gameCollection1;
+    }
+
+    public Collection<Round> getRoundCollection() {
+        return roundCollection;
+    }
+
+    public void setRoundCollection(Collection<Round> roundCollection) {
+        this.roundCollection = roundCollection;
+    }
+
+    public Collection<Gamehistory> getGamehistoryCollection() {
+        return gamehistoryCollection;
+    }
+
+    public void setGamehistoryCollection(Collection<Gamehistory> gamehistoryCollection) {
+        this.gamehistoryCollection = gamehistoryCollection;
+    }
+
+    public Collection<Gamehistory> getGamehistoryCollection1() {
+        return gamehistoryCollection1;
+    }
+
+    public void setGamehistoryCollection1(Collection<Gamehistory> gamehistoryCollection1) {
+        this.gamehistoryCollection1 = gamehistoryCollection1;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 17 * hash + this.idPersonne;
-        hash = 17 * hash + (this.nom != null ? this.nom.hashCode() : 0);
-        hash = 17 * hash + (this.adresse != null ? this.adresse.hashCode() : 0);
+        int hash = 0;
+        hash += (accountId != null ? accountId.hashCode() : 0);
         return hash;
     }
-    */
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Account)) {
+            return false;
+        }
+        Account other = (Account) object;
+        if ((this.accountId == null && other.accountId != null) || (this.accountId != null && !this.accountId.equals(other.accountId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "whoami.Account[ accountId=" + accountId + " ]";
+    }
+    
 }

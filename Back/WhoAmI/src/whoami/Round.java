@@ -1,50 +1,111 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package whoami;
 
-public class Round implements java.io.Serializable{
-    private int round_id;
-    private Game game_id;
-    private int round_number;
-    private Account winner_id;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+/**
+ *
+ * @author lmercader
+ */
+@Entity
+@Table(name = "ROUND")
+@NamedQueries({
+    @NamedQuery(name = "Round.findAll", query = "SELECT r FROM Round r"),
+    @NamedQuery(name = "Round.findByRoundId", query = "SELECT r FROM Round r WHERE r.roundId = :roundId"),
+    @NamedQuery(name = "Round.findByRoundNumber", query = "SELECT r FROM Round r WHERE r.roundNumber = :roundNumber")})
+public class Round implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Id
+    @Basic(optional = false)
+    @Column(name = "ROUND_ID")
+    private BigDecimal roundId;
+    @Column(name = "ROUND_NUMBER")
+    private BigInteger roundNumber;
+    @JoinColumn(name = "WINNER_ID", referencedColumnName = "ACCOUNT_ID")
+    @ManyToOne
+    private Account winnerId;
+    @JoinColumn(name = "GAME_ID", referencedColumnName = "GAME_ID")
+    @ManyToOne
+    private Game gameId;
 
     public Round() {
     }
 
-    public Round(int round_id, Game game_id, int round_number, Account winner_id) {
-        this.round_id = round_id;
-        this.game_id = game_id;
-        this.round_number = round_number;
-        this.winner_id = winner_id;
+    public Round(BigDecimal roundId) {
+        this.roundId = roundId;
     }
 
-    public int getRoundId() {
-        return this.round_id;
+    public BigDecimal getRoundId() {
+        return roundId;
     }
 
-    public void setRoundId(int round_id) {
-        this.round_id = round_id;
+    public void setRoundId(BigDecimal roundId) {
+        this.roundId = roundId;
     }
 
-    public int getGameId() {
-        return this.game_id;
+    public BigInteger getRoundNumber() {
+        return roundNumber;
     }
 
-    public void setGameId(Game game_id) {
-        this.game_id = game_id;
+    public void setRoundNumber(BigInteger roundNumber) {
+        this.roundNumber = roundNumber;
     }
 
-    public int getRoundNumber() {
-        return this.round_number;
+    public Account getWinnerId() {
+        return winnerId;
     }
 
-    public void setRoundNumber(int round_number) {
-        this.round_number = round_number;
+    public void setWinnerId(Account winnerId) {
+        this.winnerId = winnerId;
     }
 
-    public int getWinnerId() {
-        return this.winner_id;
+    public Game getGameId() {
+        return gameId;
     }
 
-    public void setWinnerId(Account winner_id) {
-        this.winner_id = winner_id;
+    public void setGameId(Game gameId) {
+        this.gameId = gameId;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (roundId != null ? roundId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Round)) {
+            return false;
+        }
+        Round other = (Round) object;
+        if ((this.roundId == null && other.roundId != null) || (this.roundId != null && !this.roundId.equals(other.roundId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "whoami.Round[ roundId=" + roundId + " ]";
+    }
+    
 }

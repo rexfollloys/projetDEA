@@ -1,100 +1,202 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package whoami;
 
-public class Game implements java.io.Serializable{
-    private int game_id;
-    private String game_password;
-    private Account host_id;
-    private Account guest_id;
-    private int number_of_rounds;
-    private int turn_limit;
-    private Grid grid_id;
-    private boolean spectator;
-    private String game_date;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Collection;
+import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+/**
+ *
+ * @author lmercader
+ */
+@Entity
+@Table(name = "GAME")
+@NamedQueries({
+    @NamedQuery(name = "Game.findAll", query = "SELECT g FROM Game g"),
+    @NamedQuery(name = "Game.findByGameId", query = "SELECT g FROM Game g WHERE g.gameId = :gameId"),
+    @NamedQuery(name = "Game.findByGamePassword", query = "SELECT g FROM Game g WHERE g.gamePassword = :gamePassword"),
+    @NamedQuery(name = "Game.findByNumberOfRounds", query = "SELECT g FROM Game g WHERE g.numberOfRounds = :numberOfRounds"),
+    @NamedQuery(name = "Game.findByTurnLimit", query = "SELECT g FROM Game g WHERE g.turnLimit = :turnLimit"),
+    @NamedQuery(name = "Game.findBySpectator", query = "SELECT g FROM Game g WHERE g.spectator = :spectator"),
+    @NamedQuery(name = "Game.findByGameDate", query = "SELECT g FROM Game g WHERE g.gameDate = :gameDate")})
+public class Game implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Id
+    @Basic(optional = false)
+    @Column(name = "GAME_ID")
+    private BigDecimal gameId;
+    @Basic(optional = false)
+    @Column(name = "GAME_PASSWORD")
+    private String gamePassword;
+    @Column(name = "NUMBER_OF_ROUNDS")
+    private BigInteger numberOfRounds;
+    @Column(name = "TURN_LIMIT")
+    private BigInteger turnLimit;
+    @Basic(optional = false)
+    @Column(name = "SPECTATOR")
+    private short spectator;
+    @Column(name = "GAME_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date gameDate;
+    @JoinColumn(name = "GUEST_ID", referencedColumnName = "ACCOUNT_ID")
+    @ManyToOne
+    private Account guestId;
+    @JoinColumn(name = "HOST_ID", referencedColumnName = "ACCOUNT_ID")
+    @ManyToOne
+    private Account hostId;
+    @JoinColumn(name = "GRID_ID", referencedColumnName = "GRID_ID")
+    @ManyToOne
+    private Grid gridId;
+    @OneToMany(mappedBy = "gameId")
+    private Collection<Round> roundCollection;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "game")
+    private Gamehistory gamehistory;
 
     public Game() {
     }
 
-    public Game(int game_id, String game_password, Account host_id, Account guest_id, int number_of_rounds, int turn_limit, Grid grid_id, boolean spectator, String game_date) {
-        this.game_id = game_id;
-        this.game_password = game_password;
-        this.host_id = host_id;
-        this.guest_id = guest_id;
-        this.number_of_rounds = number_of_rounds;
-        this.turn_limit = turn_limit;
-        this.grid_id = grid_id;
+    public Game(BigDecimal gameId) {
+        this.gameId = gameId;
+    }
+
+    public Game(BigDecimal gameId, String gamePassword, short spectator) {
+        this.gameId = gameId;
+        this.gamePassword = gamePassword;
         this.spectator = spectator;
-        this.game_date = game_date;
     }
 
-    public int getGameId() {
-        return this.game_id;
+    public BigDecimal getGameId() {
+        return gameId;
     }
 
-    public void setGameId(int game_id) {
-        this.game_id = game_id;
+    public void setGameId(BigDecimal gameId) {
+        this.gameId = gameId;
     }
 
     public String getGamePassword() {
-        return this.game_password;
+        return gamePassword;
     }
 
-    public void setGamePassword(String game_password) {
-        this.game_password = game_password;
+    public void setGamePassword(String gamePassword) {
+        this.gamePassword = gamePassword;
     }
 
-    public int getHostId() {
-        return this.host_id;
+    public BigInteger getNumberOfRounds() {
+        return numberOfRounds;
     }
 
-    public void setHostId(Account host_id) {
-        this.host_id = host_id;
+    public void setNumberOfRounds(BigInteger numberOfRounds) {
+        this.numberOfRounds = numberOfRounds;
     }
 
-    public int getGuestId() {
-        return this.guest_id;
+    public BigInteger getTurnLimit() {
+        return turnLimit;
     }
 
-    public void setGuestId(Account guest_id) {
-        this.guest_id = guest_id;
+    public void setTurnLimit(BigInteger turnLimit) {
+        this.turnLimit = turnLimit;
     }
 
-    public int getNumberOfRounds() {
-        return this.number_of_rounds;
+    public short getSpectator() {
+        return spectator;
     }
 
-    public void setNumberOfRounds(int number_of_rounds) {
-        this.number_of_rounds = number_of_rounds;
-    }
-
-    public int getTurnLimit() {
-        return this.turn_limit;
-    }
-
-    public void setTurnLimit(int turn_limit) {
-        this.turn_limit = turn_limit;
-    }
-
-    public int getGridId() {
-        return this.grid_id;
-    }
-
-    public void setGridId(Grid grid_id) {
-        this.grid_id = grid_id;
-    }
-
-    public boolean getSpectator() {
-        return this.spectator;
-    }
-
-    public void setSpectator(boolean spectator) {
+    public void setSpectator(short spectator) {
         this.spectator = spectator;
     }
 
-    public String getGameDate() {
-        return this.game_date;
+    public Date getGameDate() {
+        return gameDate;
     }
 
-    public void setGameDate(String game_date) {
-        this.game_date = game_date;
+    public void setGameDate(Date gameDate) {
+        this.gameDate = gameDate;
     }
+
+    public Account getGuestId() {
+        return guestId;
+    }
+
+    public void setGuestId(Account guestId) {
+        this.guestId = guestId;
+    }
+
+    public Account getHostId() {
+        return hostId;
+    }
+
+    public void setHostId(Account hostId) {
+        this.hostId = hostId;
+    }
+
+    public Grid getGridId() {
+        return gridId;
+    }
+
+    public void setGridId(Grid gridId) {
+        this.gridId = gridId;
+    }
+
+    public Collection<Round> getRoundCollection() {
+        return roundCollection;
+    }
+
+    public void setRoundCollection(Collection<Round> roundCollection) {
+        this.roundCollection = roundCollection;
+    }
+
+    public Gamehistory getGamehistory() {
+        return gamehistory;
+    }
+
+    public void setGamehistory(Gamehistory gamehistory) {
+        this.gamehistory = gamehistory;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (gameId != null ? gameId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Game)) {
+            return false;
+        }
+        Game other = (Game) object;
+        if ((this.gameId == null && other.gameId != null) || (this.gameId != null && !this.gameId.equals(other.gameId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "whoami.Game[ gameId=" + gameId + " ]";
+    }
+    
 }
