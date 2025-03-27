@@ -30,6 +30,7 @@ CREATE TABLE Grid (
 -- Create the Game table
 CREATE TABLE Game (
     game_id NUMBER,
+    game_id NUMBER,
     game_password VARCHAR(20) NOT NULL,
     host_id NUMBER,
     guest_id NUMBER,
@@ -53,6 +54,13 @@ CREATE TABLE GameHistory (
     player2_score NUMBER,
     winner_id NUMBER,
     CONSTRAINT pk_GameHistory PRIMARY KEY (game_id),
+    game_id NUMBER,
+    player1_id NUMBER,
+    player2_id NUMBER,
+    player1_score NUMBER,
+    player2_score NUMBER,
+    winner_id NUMBER,
+    CONSTRAINT pk_GameHistory PRIMARY KEY (game_id),
     CONSTRAINT fk_GameHistory_game FOREIGN KEY (game_id) REFERENCES Game(game_id),
     CONSTRAINT fk_GameHistory_player1 FOREIGN KEY (player1_id) REFERENCES Account(account_id),
     CONSTRAINT fk_GameHistory_player2 FOREIGN KEY (player2_id) REFERENCES Account(account_id)
@@ -65,6 +73,11 @@ CREATE TABLE Round (
     round_number NUMBER,
     winner_id NUMBER,
     CONSTRAINT pk_Round PRIMARY KEY (round_id),
+    round_id NUMBER,
+    game_id NUMBER,
+    round_number NUMBER,
+    winner_id NUMBER,
+    CONSTRAINT pk_Round PRIMARY KEY (round_id),
     CONSTRAINT fk_Round_game FOREIGN KEY (game_id) REFERENCES Game(game_id),
     CONSTRAINT fk_Round_winner FOREIGN KEY (winner_id) REFERENCES Account(account_id)
 );
@@ -72,13 +85,19 @@ CREATE TABLE Round (
 -- Create the Character table
 CREATE TABLE Character (
     character_id NUMBER,
+    character_id NUMBER,
     character_name VARCHAR(10) NOT NULL,
+    url_image VARCHAR(50) NOT NULL,
+    CONSTRAINT pk_Character PRIMARY KEY (character_id)
     url_image VARCHAR(50) NOT NULL,
     CONSTRAINT pk_Character PRIMARY KEY (character_id)
 );
 
 -- Create the junction table GridCharacter
 CREATE TABLE GridCharacter (
+    grid_id NUMBER,
+    character_id NUMBER,
+    CONSTRAINT pk_GridCharacter PRIMARY KEY (grid_id, character_id),
     grid_id NUMBER,
     character_id NUMBER,
     CONSTRAINT pk_GridCharacter PRIMARY KEY (grid_id, character_id),
