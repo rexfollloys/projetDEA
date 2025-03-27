@@ -9,6 +9,7 @@ USE whoami;
 CREATE TABLE Account (
     account_id NUMBER,
     username VARCHAR2(30) NOT NULL,
+    account_password VARCHAR(30) NOT NULL,
     age NUMBER,
     gender VARCHAR2(6) DEFAULT 'man',
     game_played NUMBER DEFAULT 0,
@@ -22,7 +23,7 @@ CREATE TABLE Grid (
     grid_id NUMBER,
     grid_name VARCHAR(30) NOT NULL,
     grid_size NUMBER NOT NULL,
-    random BOOLEAN NOT NULL,
+    random NUMBER(1) CHECK (random IN (0,1)),
     CONSTRAINT pk_Grid PRIMARY KEY (grid_id)
 );
 
@@ -35,11 +36,11 @@ CREATE TABLE Game (
     number_of_rounds NUMBER,
     turn_limit NUMBER,
     grid_id NUMBER,
-    spectator BOOLEAN,
-    game_date DATETIME,
+    spectator NUMBER(1) CHECK (spectator IN (0,1)),
+    game_date DATE,
     CONSTRAINT pk_Game PRIMARY KEY (game_id),
-    CONSTRAINT fk_Game_creator FOREIGN KEY (creator_id) REFERENCES Account(account_id),
-    CONSTRAINT fk_Game_opponent FOREIGN KEY (opponent_id) REFERENCES Account(account_id),
+    CONSTRAINT fk_Game_creator FOREIGN KEY (host_id) REFERENCES Account(account_id),
+    CONSTRAINT fk_Game_opponent FOREIGN KEY (guest_id) REFERENCES Account(account_id),
     CONSTRAINT fk_Game_grid FOREIGN KEY (grid_id) REFERENCES Grid(grid_id)
 );
 

@@ -53,18 +53,17 @@ public class Game implements Serializable {
     private BigInteger numberOfRounds;
     @Column(name = "TURN_LIMIT")
     private BigInteger turnLimit;
-    @Basic(optional = false)
     @Column(name = "SPECTATOR")
-    private short spectator;
+    private Short spectator;
     @Column(name = "GAME_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date gameDate;
-    @JoinColumn(name = "GUEST_ID", referencedColumnName = "ACCOUNT_ID")
-    @ManyToOne
-    private Account guestId;
     @JoinColumn(name = "HOST_ID", referencedColumnName = "ACCOUNT_ID")
     @ManyToOne
     private Account hostId;
+    @JoinColumn(name = "GUEST_ID", referencedColumnName = "ACCOUNT_ID")
+    @ManyToOne
+    private Account guestId;
     @JoinColumn(name = "GRID_ID", referencedColumnName = "GRID_ID")
     @ManyToOne
     private Grid gridId;
@@ -80,10 +79,9 @@ public class Game implements Serializable {
         this.gameId = gameId;
     }
 
-    public Game(BigDecimal gameId, String gamePassword, short spectator) {
+    public Game(BigDecimal gameId, String gamePassword) {
         this.gameId = gameId;
         this.gamePassword = gamePassword;
-        this.spectator = spectator;
     }
 
     public BigDecimal getGameId() {
@@ -118,11 +116,11 @@ public class Game implements Serializable {
         this.turnLimit = turnLimit;
     }
 
-    public short getSpectator() {
+    public Short getSpectator() {
         return spectator;
     }
 
-    public void setSpectator(short spectator) {
+    public void setSpectator(Short spectator) {
         this.spectator = spectator;
     }
 
@@ -134,20 +132,20 @@ public class Game implements Serializable {
         this.gameDate = gameDate;
     }
 
-    public Account getGuestId() {
-        return guestId;
-    }
-
-    public void setGuestId(Account guestId) {
-        this.guestId = guestId;
-    }
-
     public Account getHostId() {
         return hostId;
     }
 
     public void setHostId(Account hostId) {
         this.hostId = hostId;
+    }
+
+    public Account getGuestId() {
+        return guestId;
+    }
+
+    public void setGuestId(Account guestId) {
+        this.guestId = guestId;
     }
 
     public Grid getGridId() {

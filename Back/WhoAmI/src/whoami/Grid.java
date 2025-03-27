@@ -44,9 +44,8 @@ public class Grid implements Serializable {
     @Basic(optional = false)
     @Column(name = "GRID_SIZE")
     private BigInteger gridSize;
-    @Basic(optional = false)
     @Column(name = "RANDOM")
-    private short random;
+    private Short random;
     @ManyToMany(mappedBy = "gridCollection")
     private Collection<Character> characterCollection;
     @OneToMany(mappedBy = "gridId")
@@ -59,11 +58,10 @@ public class Grid implements Serializable {
         this.gridId = gridId;
     }
 
-    public Grid(BigDecimal gridId, String gridName, BigInteger gridSize, short random) {
+    public Grid(BigDecimal gridId, String gridName, BigInteger gridSize) {
         this.gridId = gridId;
         this.gridName = gridName;
         this.gridSize = gridSize;
-        this.random = random;
     }
 
     public BigDecimal getGridId() {
@@ -90,11 +88,11 @@ public class Grid implements Serializable {
         this.gridSize = gridSize;
     }
 
-    public short getRandom() {
+    public Short getRandom() {
         return random;
     }
 
-    public void setRandom(short random) {
+    public void setRandom(Short random) {
         this.random = random;
     }
 

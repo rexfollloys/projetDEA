@@ -27,6 +27,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
     @NamedQuery(name = "Account.findByAccountId", query = "SELECT a FROM Account a WHERE a.accountId = :accountId"),
     @NamedQuery(name = "Account.findByUsername", query = "SELECT a FROM Account a WHERE a.username = :username"),
+    @NamedQuery(name = "Account.findByAccountPassword", query = "SELECT a FROM Account a WHERE a.accountPassword = :accountPassword"),
     @NamedQuery(name = "Account.findByAge", query = "SELECT a FROM Account a WHERE a.age = :age"),
     @NamedQuery(name = "Account.findByGender", query = "SELECT a FROM Account a WHERE a.gender = :gender"),
     @NamedQuery(name = "Account.findByGamePlayed", query = "SELECT a FROM Account a WHERE a.gamePlayed = :gamePlayed"),
@@ -42,6 +43,9 @@ public class Account implements Serializable {
     @Basic(optional = false)
     @Column(name = "USERNAME")
     private String username;
+    @Basic(optional = false)
+    @Column(name = "ACCOUNT_PASSWORD")
+    private String accountPassword;
     @Column(name = "AGE")
     private BigInteger age;
     @Column(name = "GENDER")
@@ -50,9 +54,9 @@ public class Account implements Serializable {
     private BigInteger gamePlayed;
     @Column(name = "VICTORIES")
     private BigInteger victories;
-    @OneToMany(mappedBy = "guestId")
-    private Collection<Game> gameCollection;
     @OneToMany(mappedBy = "hostId")
+    private Collection<Game> gameCollection;
+    @OneToMany(mappedBy = "guestId")
     private Collection<Game> gameCollection1;
     @OneToMany(mappedBy = "winnerId")
     private Collection<Round> roundCollection;
@@ -68,9 +72,10 @@ public class Account implements Serializable {
         this.accountId = accountId;
     }
 
-    public Account(BigDecimal accountId, String username) {
+    public Account(BigDecimal accountId, String username, String accountPassword) {
         this.accountId = accountId;
         this.username = username;
+        this.accountPassword = accountPassword;
     }
 
     public BigDecimal getAccountId() {
@@ -87,6 +92,14 @@ public class Account implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getAccountPassword() {
+        return accountPassword;
+    }
+
+    public void setAccountPassword(String accountPassword) {
+        this.accountPassword = accountPassword;
     }
 
     public BigInteger getAge() {
